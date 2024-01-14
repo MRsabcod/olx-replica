@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: 'roboto';
+  src: url('Fonts/Roboto2/Roboto-Bold.ttf');
+}
+@font-face {
+  font-family: 'robotoreg';
+  src: url('Fonts/Roboto2/Roboto-Regular.ttf');
+}
+.sellbtn{
+  /* border-image: url('https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg') 30 round; */
+}
+*{
+  color:#002f34 ;
+}
+html{
+  
+  font-family:roboto ;
+}
+h1,h2,h3,h4{
+  font-family: roboto;
+}
+div span:nth-child(1){
+font-family: robotoreg;
+}
+ input::placeholder{
+  font-family: robotoreg;
+  font-weight: 600;
+ }
+
+ .category{
+  font-family: roboto;
+  border-radius: 150px;
+  background: linear-gradient(315deg, #d0d0d0, #f7f7f7);
+  box-shadow:  -3px -3px 6px #dedede,
+               3px 3px 6px #f0f0f0;
+             width: 2rem;
+             height: 2rem;
+ }
