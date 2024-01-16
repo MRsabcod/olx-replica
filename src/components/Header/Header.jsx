@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoHomeOutline, IoLaptopOutline, IoPhonePortraitOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
+import { FaPaintbrush } from "react-icons/fa6";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Header = ({categories}) => {
@@ -16,17 +17,18 @@ const Header = ({categories}) => {
 </div>
 
 {categories?.map((elem)=>{
-    return <div className='flex items-center gap-3'>
+    return <Link><div className='flex items-center gap-3'>
     <div className='category flex items-center justify-center'>
 {elem==="laptops" &&<IoLaptopOutline/>}
 {elem==="smartphones" &&<IoPhonePortraitOutline/>}
 {elem==="fragrances" &&<i  className="fa-solid fa-spray-can-sparkles fa-md "></i>}
-{elem==="skincare" &&<i class="fa-sharp fa-solid fa-paintbrush-pencil"></i>}
+{elem==="skincare" && <FaPaintbrush/>}
 {elem==="groceries" &&<i className="fa-solid fa-cart-shopping"></i>}
 {elem==="home-decoration" &&<IoHomeOutline/>}
     </div>
     <span>{elem}</span>
     </div>
+    </Link>
 })}
             </nav>
             <nav className='flex items-center gap-5 max-w-7xl pt-[1.6rem] pb-[1.6rem] justify-evenly w-full ml-auto mr-auto'>
@@ -57,7 +59,7 @@ const Header = ({categories}) => {
                 </div>
                 
                 <div>
-                    <Link className='text-black border-b-2 hover:border-b-transparent border-b-black border-solid'><span>Login</span></Link>
+                    <Link className='text-black border-b-2 hover:border-b-transparent border-b-black border-solid' to='/signin'><span>Login</span></Link>
                 </div>
                 <div>
                     <button className='sellbtn flex relative items-center justify-center rounded-[30px]  ' >

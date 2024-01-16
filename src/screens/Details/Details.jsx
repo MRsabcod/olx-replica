@@ -8,30 +8,21 @@ import Header from '../../components/Header/Header';
 import { IoCallOutline, IoChatbubblesOutline, IoChevronForward, IoLocationOutline, IoShareSocialOutline } from "react-icons/io5";
 import { FaForward, FaRegHeart } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
+import { getAporduct } from '../../config/Firebase/Firebase';
 
 
 
 
 
-const Details = () => {
+const Details = ({categories}) => {
 
     const { prodid } = useParams()
     const [proddetails, setProddetails] = useState([])
     const product = async () => {
 
-        try {
-            fetch(`https://dummyjson.com/products/${prodid}`)
+      const resp=await getAporduct(prodid)
 
-                .then(response => response.json())
-
-                .then((data) => { setProddetails(data) });
-
-
-        }
-        catch (error) {
-            console.log(error)
-        }
-
+setProddetails(resp)
 
     }
     useEffect(() => {
@@ -44,7 +35,7 @@ const Details = () => {
     console.log(proddetails?.description)
     return (
         <>
-            <Header />
+            <Header categories={categories} />
             <div className='max-w-screen-xl mr-auto ml-auto  flex gap-5 justify-between'>
 
                 <div className='max-w-[calc(100%-27rem)] flex flex-1 flex-col mt-[1.6rem] pt-[1.6rem] pb-[1.6rem] items-center justify-center'>

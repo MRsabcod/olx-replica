@@ -9,6 +9,8 @@ import {
   createRoutesFromElements,Route
 } from "react-router-dom";
 import Details from './screens/Details/Details.jsx'
+import Signin from './screens/Signin/Signin.jsx';
+import Login from './screens/Login/Login.jsx';
 const router = createBrowserRouter(
   [{
     path:"/",
@@ -16,6 +18,14 @@ const router = createBrowserRouter(
   },{
     path:"/details/:prodid",
     element:<Details/>
+
+  },{
+    path:"/signin",
+    element:<Signin/>
+
+  },{
+    path:"/login",
+    element:<Login/>
 
   }
 ]

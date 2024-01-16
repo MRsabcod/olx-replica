@@ -1,51 +1,95 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from './components/Header/Header'
 import Prodcard from './components/Prodcard/Prodcard'
+import { Addproducts, Getproducts, auth } from './config/Firebase/Firebase'
+import Usercontext from './context/Usercontext'
+import Usercontextprovider from './context/Usercontextprovider'
+import Login from './screens/Login/Login'
+
+console.log(auth)
 Header
 const App = () => {
   const [prodbucket, setprodbucket] = useState([])
   const [category, setCategory] = useState([])
   const products = async () => {
 
-    try {
-      fetch('https://dummyjson.com/products/')
-
-        .then(response => response.json())
-
-        .then((data) => {
-          setprodbucket(data.products)
-          const categroydup = []
-         console.log(typeof data.products)
-
-         data?.products?.map((elem) => {
-              if (categroydup.length == 0 || categroydup[categroydup.length - 1]!=elem.category) {
-              categroydup.push(elem.category)
-            }
-            })
-          setCategory(categroydup)
-        });
-
-
-
+  const response=await Getproducts()
+  console.log(response)
+  setprodbucket(response)
+  const categorydup=[]
+  response.map((elem)=>{
+    if(!categorydup.length || categorydup[categorydup.length-1]!=elem.category){
+      categorydup.push(elem.category)
     }
-    catch (error) {
-      console.log(error)
-    }
+  })
+  setCategory(categorydup)
+
+
+
+    
 
 
   }
   useEffect(() => {
+Addproducts()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     products()
   }, [])
   console.log(category)
+  console.log(useContext(Usercontext))
+  // console.log(user)
+  const user=useContext(Usercontext)
+  const [username, setusername] = useState(null)
   return (
-    <div>
-      <Header categories={category} />
+    <Usercontextprovider value={category} >
+      {/* <Login/> */}
+      <Header categories={category}  />
       <div className='w-full max-w-screen-xl mt-[1.6rem] mb-[1.6rem] mr-auto ml-auto flex justify-evenly flex-wrap '>
         {prodbucket.map((items) => {
-          return <Prodcard items={items} />
+          return <Prodcard items={items} categories={category} />
         })}
 
       </div>
@@ -54,7 +98,8 @@ const App = () => {
           console.log(item)
         })
       }
-    </div>
+        
+    </Usercontextprovider>
   )
 }
 export const githubinfo = async () => {
