@@ -8,18 +8,12 @@ import Header from '../../components/Header/Header';
 import { IoCallOutline, IoChatbubblesOutline, IoChevronForward, IoLocationOutline, IoShareSocialOutline } from "react-icons/io5";
 import { FaForward, FaRegHeart } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
-import { getAporduct } from '../../config/Firebase/Firebase';
-import { useDispatch } from 'react-redux';
-import Addprodetails from './Addprodetails';
-import { updateCart } from '../../features/addprodSlice';
 
 
 
 
 
-const Details = ({categories}) => {
-    const dispatch=useDispatch()
-    
+const Details = () => {
 
     const { prodid } = useParams()
     const [proddetails, setProddetails] = useState([])
@@ -41,7 +35,7 @@ setProddetails(resp)
     return (
       
         <>
-        {/* <Header  /> */}
+            <Header />
             <div className='max-w-screen-xl mr-auto ml-auto  flex gap-5 justify-between'>
 
                 <div className='max-w-[calc(100%-27rem)] flex flex-1 flex-col mt-[1.6rem] pt-[1.6rem] pb-[1.6rem] items-center justify-center'>

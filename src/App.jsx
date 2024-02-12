@@ -1,27 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Header from './components/Header/Header'
 import Prodcard from './components/Prodcard/Prodcard'
-import { Addproducts, Getproducts, auth } from './config/Firebase/Firebase'
-import Usercontext from './context/Usercontext'
-import Usercontextprovider from './context/Usercontextprovider'
-import Login from './screens/Login/Login'
-import { useOutletContext } from 'react-router-dom'
-
-console.log(auth)
 Header
 const App = () => {
   const [prodbucket, setprodbucket] = useState([])
   const [category, setCategory] = useState([])
-  const productadata=useOutletContext()
+  const products = async () => {
 
-console.log(productadata)
+    try {
+      fetch('https://dummyjson.com/products/')
+
+        .then(response => response.json())
+
+        .then((data) => {
+          setprodbucket(data.products)
+          const categroydup = []
+         console.log(typeof data.products)
+
+         data?.products?.map((elem) => {
+              if (categroydup.length == 0 || categroydup[categroydup.length - 1]!=elem.category) {
+              categroydup.push(elem.category)
+            }
+            })
+          setCategory(categroydup)
+        });
+
+
+
+    }
+    catch (error) {
+      console.log(error)
+    }
+
+
+  }
+  useEffect(() => {
+
+
+    products()
+  }, [])
+  console.log(category)
   return (
-    <Usercontextprovider value={category} >
-      {/* <Login/> */}
-      {/* <Header categories={category}  /> */}
+    <div>
+      <Header categories={category} />
       <div className='w-full max-w-screen-xl mt-[1.6rem] mb-[1.6rem] mr-auto ml-auto flex justify-evenly flex-wrap '>
-        {productadata.map((items) => {
-          return <Prodcard items={items} categories={category} />
+        {prodbucket.map((items) => {
+          return <Prodcard items={items} />
         })}
 
       </div>

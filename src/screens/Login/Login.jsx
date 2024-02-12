@@ -58,7 +58,7 @@ const Login = () => {
        <span className='text-center'>Create An Account <Link to='/signin' className='text-center underline'>Signin</Link></span>
           
            <Link to='/forgotpassword' className='text-center underline' >Forgot Password</Link>
-           <Link to='/' className='text-center underline' onClick={userlogout} >Logout</Link>
+           <Link to='/forgotpassword' className='text-center underline' onClick={userlogout} >Logout</Link>
            
            </form>
             <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClickrtl={false} pauseOnFocusLossdraggablepauseOnHover={false}   theme="dark" transition='Zoom'/>
