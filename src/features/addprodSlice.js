@@ -17,8 +17,14 @@ const prodsSlice = createSlice({
             
         },
         removeCartItem: (state, action) => {
+console.log(state.cart[action.payload.id].id,action.payload.prod.id)
 
-      state.cart=  state.cart.filter((todo)=>todo?.id!==action.payload?.id)
+
+
+
+
+state.cart[action.payload.id].id===action.payload?.prod.id?state.cart.splice(action.payload.id,1):""
+
       if(state.cart.length===0)
       {
         state.count=0;

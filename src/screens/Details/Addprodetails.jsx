@@ -1,7 +1,6 @@
 import React from 'react'
 
-const Addprodetails = () => {
-  return (
+const Addprodetails = () => {  return (
     <div>
         
     </div>

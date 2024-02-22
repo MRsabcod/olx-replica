@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Carousel } from 'flowbite-react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 // import { IoIosArrowForward } from "react-icons/io";
 import Header from '../../components/Header/Header';
@@ -8,13 +8,19 @@ import Header from '../../components/Header/Header';
 import { IoCallOutline, IoChatbubblesOutline, IoChevronForward, IoLocationOutline, IoShareSocialOutline } from "react-icons/io5";
 import { FaForward, FaRegHeart } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
+import { auth, getAporduct } from '../../config/Firebase/Firebase';
+import { useDispatch } from 'react-redux';
+import Addprodetails from './Addprodetails';
+import { updateCart } from '../../features/addprodSlice';
 
 
 
 
 
-const Details = () => {
-
+const Details = ({categories}) => {
+    const dispatch=useDispatch()
+    
+const navigate=useNavigate()
     const { prodid } = useParams()
     const [proddetails, setProddetails] = useState([])
     const product = async () => {
@@ -29,13 +35,14 @@ setProddetails(resp)
 
         product()
     }, [])
+
     console.log(proddetails)
     console.log(proddetails.images)
     console.log(proddetails?.description)
     return (
       
         <>
-            <Header />
+        {/* <Header  /> */}
             <div className='max-w-screen-xl mr-auto ml-auto  flex gap-5 justify-between'>
 
                 <div className='max-w-[calc(100%-27rem)] flex flex-1 flex-col mt-[1.6rem] pt-[1.6rem] pb-[1.6rem] items-center justify-center'>
@@ -81,7 +88,7 @@ setProddetails(resp)
 
                             {
                                 proddetails.images?.map(element => {
-                                    return <img src={element} alt="s" className='bg-ye' style={{ width: '' }} />
+                                    return <img src={element===Object?URL.createObjectURL(element):element} alt="s" className='bg-ye' style={{ width: '' }} />
 
                                 })
                             }
@@ -213,7 +220,16 @@ setProddetails(resp)
                     <div className='w-full border-2  p-10 border-solid border-[#d8dfe0]'>
                    
                         <div className='mt-4'>
-                                <button onClick={()=>{dispatch(updateCart(proddetails))}} className='flex items-center justify-center  gap-2 font-bold w-full h-[48px] rounded-md text-white bg-[#002f34]'><IoCallOutline color='white' size='1.1rem' fill='white' /> Add to Cart</button>
+                                <button onClick={()=>{
+                                    if(auth.currentUser){
+                                    
+                                        dispatch(updateCart(proddetails))
+                                    }
+                                    else{
+                                        navigate('/login')
+                                    }
+                                   
+                                    }} className='flex items-center justify-center  gap-2 font-bold w-full h-[48px] rounded-md text-white bg-[#002f34]'><IoCallOutline color='white' size='1.1rem' fill='white' /> Add to Cart</button>
                            
                         </div>
                     </div>

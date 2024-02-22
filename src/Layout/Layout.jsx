@@ -14,6 +14,7 @@ const Layout = () => {
       setproductbuck(response)
         products().then((res)=>{setcategory(res)})
         }, [])
+        
         // Addproducts().then((res)=>{setproductbuck(res)})
   return (
     <>
