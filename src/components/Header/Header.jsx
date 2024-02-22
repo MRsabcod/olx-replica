@@ -151,7 +151,7 @@ const Header = ({ categories }) => {
                         {userdetails === null ? <div  className=' flex gap-2 hover:border-b-transparent  ' ><Link to='/login' >LOGIN</Link><span>|</span><Link to='/signin'>Sign Up</Link></div> : userdetails != null ? <Link to='/login'>{userdetails?.fullname}</Link> : <div>Loading</div>}
                     </div>
                     <div>
-                        <Link to='/addproduct' className='sellbtn flex relative items-center justify-center rounded-[30px]  ' >
+                        <Link to={auth.currentUser?"/cart":"/addproduct"} className='sellbtn flex relative items-center justify-center rounded-[30px]  ' >
                             <img src="https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg" alt="" />
                             <div className='p-3 flex  items-center justify-center absolute '>
                                 <img className='mr-[0.4rem]' src="https://www.olx.com.pk/assets/iconPlusSell_noinline.75fc7ea23e80b50447cf5757d8ef083a.svg" alt="" />
